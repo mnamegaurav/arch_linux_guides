@@ -1,0 +1,29 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Created by newuser for 5.8
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
+alias pmr="python manage.py runserver"
+alias ls='ls --color=auto'
+
+# append the history not overwrite it
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=1000
+setopt SHARE_HISTORY
+
+export PATH=${PATH}:/home/gaurav/Android/Sdk/tools
+export PATH=${PATH}:/home/gaurav/Android/Sdk/platform-tools
+export JAVA_HOME=/opt/jdk-13.0.1
+export PATH=$PATH:${JAVA_HOME}/bin
+
+eval "$(pyenv init -)"
