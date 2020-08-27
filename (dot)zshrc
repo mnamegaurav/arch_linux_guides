@@ -17,8 +17,8 @@ alias ls='ls --color=auto'
 
 # append the history not overwrite it
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=1000
+HISTSIZE=10000000
+SAVEHIST=1000000000
 setopt SHARE_HISTORY
 
 export PATH=${PATH}:/home/gaurav/Android/Sdk/tools
