@@ -1,0 +1,4 @@
+1.  Install pyenv
+2.  Install openssl-1.0
+3.  Run this command
+LDFLAGS="-L/usr/lib/openssl-1.0" CFLAGS="-I/usr/include/openssl-1.0" pyenv install -v 3.5.2

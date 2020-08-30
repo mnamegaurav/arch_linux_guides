@@ -1,0 +1,8 @@
+*.pyc
+*migrations
+/PROJECT/settings.py
+/env/
+/media/
+/static/
+db.sqlite3
+PROJECT.sock

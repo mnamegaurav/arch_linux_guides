@@ -1,0 +1,7 @@
+sudo apt install nodejs npm
+
+sudo npm install -g browser-sync
+
+On the root level of project------
+python manage.py runserver
+browser-sync start --proxy "localhost:8000" --files=""

@@ -1,0 +1,142 @@
+#1 Verify the UEFI
+    ls /sys/firmware/efi/efivars
+OR  efivar -l
+
+#2 Internet
+    dhcpcd
+    ping -c 4 google.com
+
+#3 Time and Date
+    timedatectl set-ntp true
+
+#4 Partitioning(120G SSD)
+    lsblk
+    fdisk /dev/sdx
+        /dev/sdx1   EFI     512M
+        /dev/sdx2   root    40G
+        /dev/sdx3   home    70G
+
+#5 Formating
+    mkfs.fat -F32 /dev/sdx1
+    mkfs.ext4 /dev/sdx2
+    mkfs.ext4 /dev/sdx3
+
+#6 Mounting
+    mkdir /mnt/boot && mkdir /mnt/home
+    mount /dev/sdx1 /mnt/boot
+    mount /dev/sdx2 /mnt
+    mount /dev/sdx3 /mnt/home
+
+#7 Install System
+    pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware
+
+#8 Generate fstab file
+    genfstab -U /mnt >> /mnt/etc/fstab
+
+#9 Change root
+    arch-chroot /mnt
+
+#10 Create Swap File
+    fallocate -l 1G /swapfile
+    chmod 600 /swapfile
+    mkswap /swapfile
+    swapon /swapfile
+    genfstab -U /mnt >> /mnt/etc/fstab   ####"then again generate the fstab file"
+
+#10 Time Zone
+    ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+    hwclock --systohc
+
+#11 Localization
+    nano /etc/locale.gen
+        #uncomment en_US.UTF-8 UTF-8
+    locale-gen
+    echo LANG=en_US.UTF-8 > /etc/locale.conf
+
+#12 Network Configuration
+    echo gaurav > /etc/hostname
+    nano /etc/hosts
+        127.0.0.1	localhost
+        ::1		localhost
+        127.0.1.1	gaurav.localdomain	gaurav
+
+#13 Root Password
+    passwd
+
+#14 Bootloader
+    pacman -S grub efibootmgr linux-lts linux-lts-headers intel-ucode
+
+    grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch-Linux
+
+    grub-mkconfig -o /boot/grub/grub.cfg
+
+#15 Unmount and Reboot the System
+    Exit chroot enviornment by `exit` command
+    reboot
+
+#16 Desktop Enviornments and Other Things
+    useradd -g users -G wheel -s /bin/bash gaurav
+    ######### useradd -m -g users -G wheel -s /bin/bash gaurav
+
+    EDITOR=nano visudo
+        #uncomment the wheel line
+
+#17 Pacman Packages to Install
+    ## To install Gnome DE.
+        gnome gdm
+
+    ## To install xfce4 DE.
+    	xfce4
+        lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings accountsservice
+
+	xorg xorg-server xorg-apps pulseaudio pulseaudio-alsa alsa-utils pavucontrol mesa ntfs-3g xf86-video-intel gvfs gvfs-mtp gvfs-smb util-linux
+
+	networkmanager nm-connection-editor network-manager-applet dhclient powertop tlp tlp-rdw ntp ufw gufw xdg-user-dirs gnome-keyring zip unzip wget gparted git aria2 fwupd gsmartcontrol smartmontools ethtool blueman bluez bluez-utils
+
+	ffmpeg gstreamer gst-libav gst-plugins-bad gst-plugins-base gst-plugins-good gst-plugins-ugly aom libdv x265 libmpeg2 xvidcore libtheora libvpx schroedinger faac faad2 jasper openjpeg libfdk-aac a52dec celt lame libmad libmpcdec opus flac wavpack 
+
+	mpv audacious vlc youtube-dl transmission-gtk transmission-cli evince catfish telegram-desktop engrampa reflector geary vim
+
+	audacity handbrake gimp inkscape blender natron cheese libreoffice-still uget
+
+	ttf-dejavu ttf-ubuntu-font-family ttf-indic-otf ttf-opensans ttf-freefont ttf-hack ttf-roboto gtk-engine-murrine otf-fira-code
+
+#18 System Services
+	systemctl enable lightdm
+	systemctl enable NetworkManager
+	systemctl enable ufw
+	systemctl enable fstrim.timer
+	systemctl enable tlp
+	systemctl enable tlp-sleep
+	systemctl mask systemd-rfkill.service
+	systemctl mask systemd-rfkill.socket
+
+#19 Install yay and pamac-aur
+    git clone https://aur.archlinux.org/pikaur.git
+    cd pikaur
+    makepkg -si
+
+    pikaur -S pamac-aur vimix-gtk-themes-git flat-remix adapta-gtk-theme flat-remix-gtk
+
+    pikaur -S postman-bin visual-studio-code-bin dxvk-bin xfce4-panel-profiles scrcpy tor-browser dropbox audio-recorder codecs64
+
+    pikaur -S vala-panel-appmenu-xfce-git vala-panel-appmenu-registrar-git vala-panel-appmenu-common-git
+
+#20 Extra Things
+
+    Turn off pc speaker(beep sound)
+        echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+
+    Modify Bashrc file
+
+    Add this line in ext4 partition 
+    	"rw,relatime,data=ordered,discard,noatime"
+
+    Deccrease swappiness
+        sudo nano /etc/sysctl.d/99-sysctl.conf
+        and add the line "vm.swappiness=10"
+
+    Edit /etc/pulse/daemon.conf
+
+#21 Reboot your system
+    Voila! your system is ready

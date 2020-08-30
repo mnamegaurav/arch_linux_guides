@@ -1,0 +1,20 @@
+{
+    "color_scheme": "Packages/Theme - Gravity/One Dark Gravity.tmTheme",
+    "font_face": "Source Code Pro Regular",
+    "font_size": 10,
+    "ignored_packages":
+    [
+    ],
+    "margin": 0,
+    "theme": "Adaptive.sublime-theme",
+    "translate_tabs_to_spaces": true
+}
+
+
+Packages to Install
+A File Icon
+Emmet
+jquery
+Python Completion
+SublimeLinter
+Theme Gravity

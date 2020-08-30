@@ -1,0 +1,8 @@
+# first of all install these packages
+sudo pacman -S zsh zsh-autosuggestions zsh-completions zsh-docs zsh-history-substring-search zsh-lovers zsh-syntac-highlighting zsh-theme-powerlevel10k
+
+# then run this command
+sudo chsh -s /bin/zsh
+
+# then logout of your system and login again
+open the terminal you will be welcomed by zsh now
