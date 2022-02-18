@@ -34,14 +34,14 @@ OR  efivar -l
     genfstab -U /mnt >> /mnt/etc/fstab
 
 #9 Change root
-    arch-chroot /mnt
+    arch-chroot /mnt    
 
 #10 Create Swap File
     fallocate -l 1G /swapfile
     chmod 600 /swapfile
     mkswap /swapfile
     swapon /swapfile
-    genfstab -U /mnt >> /mnt/etc/fstab   ####"then again generate the fstab file"
+    genfstab -U / >> /etc/fstab   ####"then again generate the fstab file"
 
 #10 Time Zone
     ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
@@ -87,19 +87,11 @@ OR  efivar -l
 
     ## To install xfce4 DE.
     	xfce4
-        lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings accountsservice
+        lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings accountsservice xorg xorg-server xorg-apps pulseaudio pulseaudio-alsa alsa-utils alsa-firmware pavucontrol mesa ntfs-3g xf86-video-intel gvfs gvfs-mtp gvfs-smb gvfs-gphoto2 gvfs-google gvfs-goa gvfs-nfs util-linux networkmanager nm-connection-editor network-manager-applet dhclient powertop tlp tlp-rdw ntp ufw gufw xdg-user-dirs gnome-keyring zip unzip wget git aria2 fwupd ethtool blueman bluez bluez-utils bluez-cups accounts-qml-module android-file-transfer android-tools arch-audit bashtop mypy mysql-python mysql-workbench neofetch nginx obs-studio pgadmin4 powertop pyenv chromium discord eslint filezilla firefox gdal github-cli redis redshift reflector ristretto simplescreenrecorder sqlitebrowser sublime-text traceroute tree typescript uvicorn yarn zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting zsh-theme-powerlevel10k docker-compose drawing ffmpeg gstreamer gst-libav gst-plugins-bad gst-plugins-base gst-plugins-good gst-plugins-ugly aom libdv x265 libmpeg2 xvidcore libtheora libvpx schroedinger faac faad2 jasper libfdk-aac a52dec celt lame libmad libmpcdec opus flac wavpack mpv audacious vlc youtube-dl transmission-gtk transmission-cli evince catfish telegram-desktop engrampa reflector vim audacity gimp uget ttf-dejavu ttf-ubuntu-font-family ttf-indic-otf ttf-opensans ttf-freefont ttf-hack ttf-roboto gtk-engine-murrine zsh x264 x265 whois vulkan-intel rabbitmq postgresql nodejs-lts-fermium less jupyter-notebook jupyter gtk2 gtk3 gtk4 graphviz adobe-source-code-pro-fonts
 
-	xorg xorg-server xorg-apps pulseaudio pulseaudio-alsa alsa-utils pavucontrol mesa ntfs-3g xf86-video-intel gvfs gvfs-mtp gvfs-smb util-linux
+        otf-fira-code openjpeg 
 
-	networkmanager nm-connection-editor network-manager-applet dhclient powertop tlp tlp-rdw ntp ufw gufw xdg-user-dirs gnome-keyring zip unzip wget gparted git aria2 fwupd gsmartcontrol smartmontools ethtool blueman bluez bluez-utils
-
-	ffmpeg gstreamer gst-libav gst-plugins-bad gst-plugins-base gst-plugins-good gst-plugins-ugly aom libdv x265 libmpeg2 xvidcore libtheora libvpx schroedinger faac faad2 jasper openjpeg libfdk-aac a52dec celt lame libmad libmpcdec opus flac wavpack 
-
-	mpv audacious vlc youtube-dl transmission-gtk transmission-cli evince catfish telegram-desktop engrampa reflector geary vim
-
-	audacity handbrake gimp inkscape blender natron cheese libreoffice-still uget
-
-	ttf-dejavu ttf-ubuntu-font-family ttf-indic-otf ttf-opensans ttf-freefont ttf-hack ttf-roboto gtk-engine-murrine otf-fira-code
+        gparted gsmartcontrol smartmontools rofi cheese
 
 #18 System Services
 	systemctl enable lightdm
@@ -116,12 +108,12 @@ OR  efivar -l
     cd pikaur
     makepkg -si
 
-    pikaur -S pamac-aur vimix-gtk-themes-git flat-remix adapta-gtk-theme flat-remix-gtk
+    pikaur -S pamac-aur flat-remix flat-remix-gtk
 
-    pikaur -S postman-bin visual-studio-code-bin dxvk-bin xfce4-panel-profiles scrcpy tor-browser dropbox audio-recorder codecs64
+    pikaur -S visual-studio-code-bin dxvk-bin xfce4-panel-profiles scrcpy dropbox audio-recorder codecs64
 
-    pikaur -S vala-panel-appmenu-xfce-git vala-panel-appmenu-registrar-git vala-panel-appmenu-common-git
-
+    pikaur -S vala-panel-appmenu-xfce-git vala-panel-appmenu-registrar-git vala-panel-appmenu-common-git appmenu-gtk-module libdbusmenu-gtk2
+ 
 #20 Extra Things
 
     Turn off pc speaker(beep sound)

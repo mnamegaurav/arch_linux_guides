@@ -1,0 +1,11 @@
+[user]
+	email = gaurav91297@gmail.com
+	name = Gaurav Sharma
+[includeIf "gitdir:~/DevJunction/"]
+    path = "~/DevJunction/.gitconfig"
+[color]
+	ui = true
+[init]
+	defaultBranch = main
+[credential]
+	helper = store
